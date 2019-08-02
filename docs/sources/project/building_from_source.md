@@ -40,6 +40,30 @@ go run build.go setup
 go run build.go build              # (or 'go build ./pkg/cmd/grafana-server')
 ```
 
+## If you want to build for other platform, like darwin、arm and etc. You might to execute this:
+```bash
+GOOS=darwin GOARCH=amd64 go run build.go build                         19-08-02 21:26
+Version: 6.4.0-pre, Linux Version: 6.4.0, Package Iteration: 1564752379pre
+go version
+go version go1.12.6 darwin/amd64
+Targeting darwin/amd64
+go build -ldflags -w -X main.version=6.4.0-pre -X main.commit=21f702f7c -X main.buildstamp=1564592166 -X main.buildBranch=master -o ./bin/darwin-amd64/grafana-server ./pkg/cmd/grafana-server
+go version
+go version go1.12.6 darwin/amd64
+Targeting darwin/amd64
+go build -ldflags -w -X main.version=6.4.0-pre -X main.commit=21f702f7c -X main.buildstamp=1564592166 -X main.buildBranch=master -o ./bin/darwin-amd64/grafana-cli ./pkg/cmd/grafana-cli
+```
+
+### On mips、mips64[el] platform will be error with on amd 
+```
+>>GOOS=linux GOARCH=mips go run build.go build
+fork/exec /var/folders/_l/496nf5g13h10jw_9919kr8fm0000gn/T/go-build938241697/b001/exe/build: exec format error
+>>GOOS=linux GOARCH=mips64 go run build.go build
+fork/exec /var/folders/_l/496nf5g13h10jw_9919kr8fm0000gn/T/go-build943803435/b001/exe/build: exec format error
+>>GOOS=linux GOARCH=mips64le go run build.go build
+fork/exec /var/folders/_l/496nf5g13h10jw_9919kr8fm0000gn/T/go-build225681580/b001/exe/build: exec format error
+```
+
 #### Building on Windows
 
 The Grafana backend includes Sqlite3 which requires GCC to compile. So in order to compile Grafana on windows you need to install GCC. We recommend [TDM-GCC](http://tdm-gcc.tdragon.net/download).
